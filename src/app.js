@@ -114,6 +114,23 @@ class Game {
     }
 }
 
+let boardEl = document.getElementById('board')
+
+for (let i = 0; i < 8; i++) {
+    let row = document.createElement('div')
+    row.className = 'row'
+    for (let j = 0; j < 8; j++) {
+        let className = 'col'
+        if (i % 2 === 0 && j % 2 !== 0) {
+            className += 'black'
+        }
+        let col = document.createElement('div')
+        col.className = className
+        row.appendChild(col)
+    }
+    boardEl.appendChild(row)
+}
+
 let rows = document.getElementsByClassName('row').children
 
 rows = rows.map(e => e.children)

@@ -33,7 +33,7 @@ body .board {
 .col.black {
     background-image: url('./img/dark-wood-shade.jpeg');
 }
-.col.white {
+.col {
     background-image: url('./img/wood-shade.webp');
 }
 
