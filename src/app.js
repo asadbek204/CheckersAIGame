@@ -1,152 +1,143 @@
-class Position {
-    constructor(x = 0, y = 0) {
-        this.x = x
-        this.y = y
+var Position = /** @class */ (function () {
+    function Position(x, y) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        this.x = x;
+        this.y = y;
     }
-}
-
-class Player {
-
-    constructor(color, pawnList) {
-        this.color = color
-        this.pawnList = pawnList
-        this.selected = pawnList[0]
-        this.canMove = true
-        this.moved = false
-        this.movTo = Position()
+    return Position;
+}());
+var Player = /** @class */ (function () {
+    function Player(color, pawnList) {
+        this.color = color;
+        this.pawnList = pawnList;
+        this.selected = pawnList[0];
+        this.canMove = true;
+        this.moved = false;
+        this.movTo = new Position();
     }
-
-    move() {
+    Player.prototype.move = function (callback) {
         if (!this.canMove)
-            return
-        while(this.moved) {}
-        this.moved = false
-        
+            return;
+        while (this.moved) { }
+        this.moved = false;
+    };
+    return Player;
+}());
+var Pawn = /** @class */ (function () {
+    function Pawn(color, position) {
+        this.color = color;
+        this.position = position;
+        var pawn = document.createElement('div');
+        pawn.className = 'pawn-simple';
+        pawn.id = "pawn-".concat(position.x, "-").concat(position.y);
+        pawn.style.width = '100%';
+        pawn.style.height = '100%';
+        pawn.style.backgroundImage = "url('src/img/".concat(this.color, "-pawn.png')");
+        pawn.style.backgroundPosition = 'center';
+        pawn.style.backgroundSize = 'cover';
+        pawn.style.borderRadius = '50%';
+        this.pawn = pawn;
     }
-}
-
-class Pawn {
-
-    constructor(color, position) {
-        this.color = color
-        this.position = position
-        let pawn = document.createElement('div')
-        pawn.class = 'pawn-simple'
-        pawn.id = `pawn-${position.x}-${position.y}`
-        pawn.style.width = '100%'
-        pawn.style.height = '100%'
-        pawn.style.backgroundImage = `url('src/${this.color}-pawn')`
-        pawn.style.backgroundPosition = 'center'
-        pawn.style.backgroundSize = 'cover'
-        this.pawn = pawn
+    Pawn.prototype.move = function (callback) {
+        this.pawn.onclick = callback;
+    };
+    return Pawn;
+}());
+var Board = /** @class */ (function () {
+    function Board(whitePawns, blackPawns, rows) {
+        this.whitePawns = whitePawns;
+        this.blackPawns = blackPawns;
+        this.rows = rows;
+        whitePawns.forEach(this.mount);
+        blackPawns.forEach(this.mount);
     }
-
-    move(callback) {
-        this.pawn.onclick = callback
+    Board.prototype.mount = function (pawn) {
+        console.log(this.rows[pawn.position.x][pawn.position.y]);
+        this.rows[pawn.position.x][pawn.position.y].appendChild(pawn.pawn);
+    };
+    Board.prototype.unmount = function (pawn) {
+        pawn.pawn.remove();
+    };
+    Board.prototype.clear = function () {
+        this.whitePawns.forEach(this.unmount);
+        this.blackPawns.forEach(this.unmount);
+    };
+    return Board;
+}());
+var Game = /** @class */ (function () {
+    function Game(whitePlayer, blackPlayer, board) {
+        this.currentPlayer = whitePlayer;
+        this.nextPlayer = blackPlayer;
+        this.waiting = true;
+        this.board = board;
     }
-}
-
-class Board {
-
-    constructor(whitePawns, blackPawns, rows) {
-        this.whitePawns = whitePawns
-        this.blackPawns = blackPawns
-        this.rows = rows
-        whitePawns.forEach(this.mount)
-        blackPawns.forEach(this.mount)
-    }
-
-    mount(pawn) {
-        this.rows[this.position[0]][this.position[1]].appendChield(pawn)
-    }
-
-    unmount(pawn) {
-        pawn.remove()
-    }
-
-    clear() {
-        this.whitePawns.forEach(this.unmount)
-        this.blackPawns.forEach(this.unmount)
-    }
-}
-
-class Game {
-
-    constructor(whitePlayer, blackPlayer, board) {
-        this.currentPlayer = whitePlayer
-        this.nextPlyer = blackPlayer
-        this.waiting = true
-        this.board = board
-    }
-
-    start() {
-
-        this.mainLoop()
-    }
-
-    changePlayer() {
-        [this.currentPlayer, this.nextPlyer] = [this.nextPlyer, this.currentPlayer]
-    }
-
-    mainLoop() {
-        while (true) {
-            this.waiting = true
-            while(this.waiting){
-                this.currentPlayer.move(this.move)
-            }
-            if (this.whitePawns.length === 0 || this.blackPawns.length === 0)
-                break
-            if (this.currentPlayer.canMove){
-                this.over(this.nextPlyer.color)
-                return
-            }
+    Game.prototype.start = function () {
+        this.mainLoop();
+    };
+    Game.prototype.changePlayer = function () {
+        var _a;
+        _a = [this.nextPlayer, this.currentPlayer], this.currentPlayer = _a[0], this.nextPlayer = _a[1];
+    };
+    Game.prototype.mainLoop = function () {
+        if (this.board.whitePawns.length === 0 || this.board.blackPawns.length === 0) {
+            this.over(this.nextPlayer.color);
+            return;
         }
-        this.over((this.whitePawns.length === 0) ? 'black' : 'white')
-    }
-
-    move() {
-        
-        this.waiting = false
-    }
-
-    over(winner) {
-        alert(`${winner} wins!!!`)
-    }
-}
-
-let boardEl = document.getElementById('board')
-
-for (let i = 0; i < 8; i++) {
-    let row = document.createElement('div')
-    row.className = 'row'
-    for (let j = 0; j < 8; j++) {
-        let className = 'col'
-        if (i % 2 === 0 && j % 2 !== 0) {
-            className += 'black'
+        if (!this.currentPlayer.canMove) {
+            this.over(this.nextPlayer.color);
+            return;
         }
-        let col = document.createElement('div')
-        col.className = className
-        row.appendChild(col)
+        this.waiting = true;
+        this.currentPlayer.move(this.move);
+    };
+    Game.prototype.move = function (pawn, to) {
+        this.waiting = false;
+    };
+    Game.prototype.over = function (winner) {
+        alert("".concat(winner, " wins!!!"));
+    };
+    return Game;
+}());
+var createBoard = function (id) {
+    var rows = [];
+    var whitePawns = [];
+    var blackPawns = [];
+    var boardEl = document.getElementById(id);
+    if (boardEl === null)
+        throw Error("board not found in html havn't element with id ".concat(id));
+    boardEl.className = id;
+    for (var i = 0; i < 8; i++) {
+        var row = document.createElement('div');
+        var rowStep = [];
+        row.className = 'row';
+        for (var j = 0; j < 8; j++) {
+            var className = 'col';
+            if ((i % 2 === 0 && j % 2 !== 0) || (i % 2 !== 0 && j % 2 === 0)) {
+                className += ' black';
+                if (i < 3)
+                    whitePawns.push(new Pawn('white', new Position(i, j)));
+                else if (i > 4)
+                    blackPawns.push(new Pawn('dark', new Position(i, j)));
+            }
+            var col = document.createElement('div');
+            col.className = className;
+            rowStep.push(col);
+            row.appendChild(col);
+        }
+        rows.push(rowStep);
+        boardEl.appendChild(row);
     }
-    boardEl.appendChild(row)
-}
-
-let rows = document.getElementsByClassName('row').children
-
-rows = rows.map(e => e.children)
-
-let whitePawns = Array(12)
-let blackPawns = Array(12)
-
-whitePawns = whitePawns.map(e => new Pawn('white', new Position()))
-blackPawns = blackPawns.map(e => new Pawn('dark', new Position()))
-
-let whitePlayer = new Player('white')
-let blackPlayer = new Player('dark')
-
-
-let board = new Board(whitePawns, blackPawns, rows)
-
-let game = new Game(whitePlayer, blackPlayer, board)
-
-game.start()
+    return [rows, whitePawns, blackPawns];
+};
+// const main = () => {
+var _a = createBoard('board'), rows = _a[0], whitePawns = _a[1], blackPawns = _a[2];
+var whitePlayer = new Player('white', whitePawns);
+var blackPlayer = new Player('dark', blackPawns);
+var board = new Board(whitePawns, blackPawns, rows);
+var game = new Game(whitePlayer, blackPlayer, board);
+// game.start()
+// }
+// while (true){
+// main()
+// }
