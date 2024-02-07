@@ -3,7 +3,7 @@ import AIPlayer from './Ai.js'
 
 function main() {
 
-    let game = new Game({board: 'black'})
+    let game = new Game({board: 'board'})
     // game.start()
 }
 
