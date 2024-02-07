@@ -1,4 +1,4 @@
-import { Pawn, Cell } from "./Game.js"
+import { Color, Pawn, Cell } from "./Game.js"
 
 export enum PlayerStates {
     waiting,
@@ -6,51 +6,42 @@ export enum PlayerStates {
     moving,
 }
 
-
 export default class Player {
-    private color: string
-    private pawnList: Pawn[]
-    private selected: Pawn
+    private color: Color
+    private pawnList: Pawn[] = []
+    private selected?: Pawn = undefined
     private canMove: boolean = true
     private moved: boolean = false
     private movTo?: Cell = undefined
     private state: PlayerStates
 
-    constructor(color: string, pawnList: Pawn[]) {
+    constructor(color: Color) {
         this.color = color
-        this.pawnList = pawnList
-        this.selected = pawnList[0]
         this.state = (color === 'white') ? PlayerStates.selecting : PlayerStates.waiting
     }
 
-    setQueue() {
-
-    }
-
-    CanMove() {
-        return this.canMove
-    }
-
-    Color() {
-        return this.color
-    }
-
-    setState(state: number) {
-        this.state = state
-    }
-
-    State() {
-        return this.state
-    }
-}
-
-export class AIPlayer extends Player {
-    constructor(color: string, pawnList: Pawn[]) {
-        super(color, pawnList)
+    setPawnList(): void {
+        
     }
 
     setQueue(): void {
-        
+
+    }
+
+    CanMove(): boolean {
+        return this.canMove
+    }
+
+    Color(): Color {
+        return this.color
+    }
+
+    setState(state: number): void {
+        this.state = state
+    }
+
+    State(): PlayerStates {
+        return this.state
     }
 }
 

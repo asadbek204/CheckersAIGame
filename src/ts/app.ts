@@ -1,16 +1,9 @@
-
-import Game, { createBoard, Board } from './Game.js'
-import Player from './Player.js'
-
+import Game, {Color} from './Game.js'
+import AIPlayer from './Ai.js'
 
 function main() {
-    let [rows, whitePawns, blackPawns] = createBoard('board')
-    let whitePlayer = new Player('white', whitePawns)
-    let blackPlayer = new Player('dark', blackPawns)
 
-    let board = new Board(whitePawns, blackPawns, rows)
-
-    let game = new Game(whitePlayer, blackPlayer, board)
+    let game = new Game({board: 'black'})
     // game.start()
 }
 
