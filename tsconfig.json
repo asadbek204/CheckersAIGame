@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "ES2015",
+    "moduleResolution": "node",
+    "outDir": "src/js",
+    "rootDir": "src/ts",
+    "target": "es6"
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
+}
