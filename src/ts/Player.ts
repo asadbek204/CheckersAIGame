@@ -1,4 +1,4 @@
-import { Color, Pawn, Cell } from "./Game.js"
+import {Cell, Color, Pawn} from "./Game.js"
 
 export enum PlayerStates {
     waiting,
@@ -7,7 +7,7 @@ export enum PlayerStates {
 }
 
 export default class Player {
-    private color: Color
+    readonly color: Color
     private pawnList: Pawn[] = []
     private selected?: Pawn = undefined
     private canMove: boolean = true
@@ -30,10 +30,6 @@ export default class Player {
 
     CanMove(): boolean {
         return this.canMove
-    }
-
-    Color(): Color {
-        return this.color
     }
 
     setState(state: number): void {

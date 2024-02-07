@@ -74,24 +74,24 @@ class Board {
 
 type GameParams = {
     board: string
-    Player1?: Player 
+    Player1?: Player
     Player2?: Player
 }
 
 export default class Game {
-    currentPlayer: Player
-    nextPlayer: Player
-    waiting: boolean
+    currentPlayer: Player = new Player(Color.white)
+    nextPlayer: Player = new Player(Color.black)
     board: Board
 
     constructor({board, Player1, Player2}: GameParams) {
-        if (Player1.Color() === Player2.Color())
-            throw Error(`you cann't declare to ${Player1.Color()} players`)
-        this.currentPlayer = Player1
-        this.nextPlayer = Player2
-        if (Player1.Color() === 'black')
+        if (!(Player1 === undefined || Player2 === undefined)) {
+            if (Player1.color === Player2.color)
+                throw Error(`you can't declare to ${Player1.color} players`)
+            this.currentPlayer = Player1
+            this.nextPlayer = Player2
+        }
+        if (this.currentPlayer.color === 'black')
             [this.currentPlayer, this.nextPlayer] = [this.nextPlayer, this.currentPlayer]
-        this.waiting = true
         this.board = this.createBoard(board)
     }
 
@@ -105,14 +105,13 @@ export default class Game {
 
     mainLoop() {
         if (this.board.whitePawns.length === 0 || this.board.blackPawns.length === 0) {
-            this.over(this.nextPlayer.Color())
+            this.over(this.nextPlayer.color)
             return
         }
         if (!this.currentPlayer.CanMove()){
-            this.over(this.nextPlayer.Color())
+            this.over(this.nextPlayer.color)
             return
         }
-        this.waiting = true
         // this.currentPlayer.move()
     }
 
@@ -127,7 +126,7 @@ export default class Game {
         let blackPawns: Pawn[] = []
         let boardEl = document.getElementById(id)
         if (boardEl === null)
-            throw Error(`board not found in html havn't element with id ${id}`)
+            throw Error(`board not found in html haven't element with id ${id}`)
         boardEl.className = id
         for (let i = 0; i < 8; i++) {
             let row = document.createElement('div')
