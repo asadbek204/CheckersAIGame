@@ -56,7 +56,12 @@ game.start() // starts the game
 - **class Player**
   -
 
-  - fields 
+  - fields: <br> 
+    <pre>
+    <b>color</b>     -  defines player pawns color <br>
+    <b>pawnList</b>  -  Array of player pawns <br>
+    <b>selected</b>  -  the pawn chosen by player
+    </pre>
   - ```typescript
         export default class Player {
           readonly color: Color
@@ -101,8 +106,11 @@ game.start() // starts the game
 - **class Game**
   -
   
-    - fields: <br> **currentPlayer** and **nextPlayer** are checkers players (instance of Player) <br>
-      **board** will be automatically created using the div id you provided (the one we gave to the Game constructor).
+    - fields: <br>
+      <pre>
+      <b>currentPlayer</b> and <b>nextPlayer</b>   -   are checkers players (instance of Player) <br>
+      <b>board</b>                          -   will be automatically created using the div id you provided (the one we gave to the Game constructor).
+      </pre>
       - ```typescript
         export default class Game {
             currentPlayer: Player // the player ready to move checkers pawn
