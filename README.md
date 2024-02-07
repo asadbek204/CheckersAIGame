@@ -5,4 +5,4 @@
 ---
 
 - You can just clone and run it 
-- 
+- Project writen in typescript
