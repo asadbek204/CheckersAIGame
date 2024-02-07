@@ -35,22 +35,22 @@ game.start() // starts the game
     serve
     ```
     *or*
-    - ```bash
-      serve -l 8080
-      ```
-      - expected output: <br> 
-      -  <pre>
-         ┌───────────────────────────────────────────┐
-         │                                           │
-         │   Serving!                                │
-         │                                           │
-         │   - Local:    http://localhost:3000       │
-         │   - Network:  http://192.168.0.1:3000     │
-         │                                           │
-         │   Copied local address to clipboard!      │
-         │                                           │
-         └───────────────────────────────────────────┘
-        </pre>
+  - ```bash
+    serve -l 8080
+    ```
+    - expected output: <br> 
+    -  <pre>
+       ┌───────────────────────────────────────────┐
+       │                                           │
+       │   Serving!                                │
+       │                                           │
+       │   - Local:    http://localhost:3000       │
+       │   - Network:  http://192.168.0.1:3000     │
+       │                                           │
+       │   Copied local address to clipboard!      │
+       │                                           │
+       └───────────────────────────────────────────┘
+      </pre>
 ---
 
 - **class Player**
