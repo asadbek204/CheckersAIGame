@@ -1,4 +1,4 @@
-import Player, {PlayerStates} from "./Player.js"
+import Player, {PlayerStates} from "./Player"
 
 export enum Color {
     black = 'black',

@@ -3,9 +3,20 @@
 **Open Source Project**
 
 ---
+contacts:
+-
 
-- You can just clone and run it 
-- Project writen in typescript
+<a href="mailto=ahikmatullayev024@gmail.com"><img src="./src/img/Gmail_icon.png" style="width: 15px"> ***Gmail*** <br></a>
+[<img src="./src/img/Telegram_logo.webp" style="width: 15px"> ***Telegram***](https://t.me/asadbek_hikmatullayev) <br>
+[<img src="./src/img/Instagram_icon.webp" style="width: 15px"> ***Instagram***](https://www.instagram.com/asadbek_2506/)
+
+---
+
+
+---
+
+- You can just clone and run it <br> 
+ the project written in typescript
 
 - You can integrate this project codes in your own ts project very simply for this you should import class Game and invoke object from this class. 
 
@@ -44,8 +55,8 @@ game.start() // starts the game
        │                                           │
        │   Serving!                                │
        │                                           │
-       │   - Local:    http://localhost:3000       │
-       │   - Network:  http://192.168.0.1:3000     │
+       │   - Local:    http://localhost:8080       │
+       │   - Network:  http://192.168.0.1:8080     │
        │                                           │
        │   Copied local address to clipboard!      │
        │                                           │

@@ -1,5 +1,5 @@
-import Game, {Color} from './Game.js'
-import AIPlayer from './Ai.js'
+import Game, {Color} from './Game'
+import AIPlayer from './Ai'
 
 function main() {
 

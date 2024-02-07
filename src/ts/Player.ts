@@ -1,4 +1,4 @@
-import {Cell, Color, Pawn} from "./Game.js"
+import {Cell, Color, Pawn} from "./Game"
 
 export enum PlayerStates {
     waiting,
