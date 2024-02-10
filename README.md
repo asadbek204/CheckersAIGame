@@ -50,7 +50,7 @@ game.start() // starts the game
     serve -l 8080
     ```
     - expected output: <br> 
-    -  <pre>
+     <pre>
        ┌───────────────────────────────────────────┐
        │                                           │
        │   Serving!                                │
